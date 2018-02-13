@@ -5,7 +5,7 @@ import UrlForm from '../components/UrlForm';
 
 function UpdatePage({ url: { query } }) {
   if (query.resource) {
-    return <MetadataForm />;
+    return <MetadataForm resource={query.resource} />;
   }
   return <UrlForm />;
 }
