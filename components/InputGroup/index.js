@@ -1,8 +1,8 @@
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, func, shape, string } from 'prop-types';
 import React from 'react';
 import Input from '../Input';
 
-function InputGroup({ service, records }) {
+function InputGroup({ service, records, onChange }) {
   return (
     <div>
       <h3>{service}</h3>
@@ -10,8 +10,10 @@ function InputGroup({ service, records }) {
         {records.map(record => (
           <Input
             key={record.name}
-            placeholder={record.name}
+            name={record.name}
             value={record.value}
+            placeholder={record.name}
+            onChange={onChange}
           />
         ))}
       </div>
@@ -20,6 +22,7 @@ function InputGroup({ service, records }) {
 }
 
 InputGroup.propTypes = {
+  onChange: func.isRequired,
   service: string.isRequired,
   records: arrayOf(
     shape({

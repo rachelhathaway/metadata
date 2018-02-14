@@ -53,4 +53,41 @@ describe('<MetadataForm>', () => {
     const { wrapper, props } = setup();
     expect(wrapper.find('InputGroup').length).toEqual(props.metadata.length);
   });
+
+  it('should props.metadata to state', () => {
+    const { wrapper, props } = setup();
+    expect(wrapper.state('metadata')).toEqual(props.metadata);
+  });
+
+  describe('handleChange', () => {
+    it('should update the specified service record', () => {
+      const service = 'a';
+      const name = 'a one';
+      const value = 'I changed this.';
+      const { wrapper } = setup();
+      wrapper.instance().handleChange(service)(name, value);
+      const expected = [
+        {
+          service: 'a',
+          records: [
+            { name, value },
+            {
+              name: 'a two',
+              value: 'something else'
+            }
+          ]
+        },
+        {
+          service: 'b',
+          records: [
+            {
+              name: 'b one',
+              value: 'another value'
+            }
+          ]
+        }
+      ];
+      expect(wrapper.state('metadata')).toEqual(expected);
+    });
+  });
 });

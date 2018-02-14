@@ -4,6 +4,7 @@ import InputGroup from './index';
 
 function setup(overrides) {
   const defaultProps = {
+    onChange: jest.fn(),
     service: 'facebook',
     records: [
       {
